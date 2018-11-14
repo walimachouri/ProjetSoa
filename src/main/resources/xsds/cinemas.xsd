@@ -1,0 +1,85 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.concretepage.com/cinema-ws"
+           targetNamespace="http://www.concretepage.com/cinema-ws" elementFormDefault="qualified">
+
+    <xs:element name="getCinemaByIdRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="cinemaId" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getCinemaByIdResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="cinemaInfo" type="tns:cinemaInfo"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="cinemaInfo">
+        <xs:sequence>
+            <xs:element name="cinemaId" type="xs:long"/>
+            <xs:element name="title" type="xs:string"/>
+            <xs:element name="adresse" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="getAllCinemasRequest">
+        <xs:complexType/>
+    </xs:element>    
+    <xs:element name="getAllCinemasResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="cinemaInfo" type="tns:cinemaInfo" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>   
+    <xs:complexType name="serviceStatus">
+        <xs:sequence>
+            <xs:element name="statusCode" type="xs:string"/>
+            <xs:element name="message" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>     
+    <xs:element name="addCinemaRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="title" type="xs:string"/>
+                <xs:element name="adresse" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="addCinemaResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="serviceStatus" type="tns:serviceStatus"/>            
+                <xs:element name="cinemaInfo" type="tns:cinemaInfo"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="updateCinemaRequest">
+        <xs:complexType>
+            <xs:sequence>
+               <xs:element name="cinemaInfo" type="tns:cinemaInfo"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="updateCinemaResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="serviceStatus" type="tns:serviceStatus"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="deleteCinemaRequest">
+        <xs:complexType>
+            <xs:sequence>
+               <xs:element name="cinemaId" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="deleteCinemaResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="serviceStatus" type="tns:serviceStatus"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>                   
+</xs:schema>

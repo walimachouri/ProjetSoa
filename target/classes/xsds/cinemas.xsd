@@ -24,20 +24,20 @@
     </xs:complexType>
     <xs:element name="getAllCinemasRequest">
         <xs:complexType/>
-    </xs:element>    
+    </xs:element>
     <xs:element name="getAllCinemasResponse">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="cinemaInfo" type="tns:cinemaInfo" maxOccurs="unbounded"/>
             </xs:sequence>
         </xs:complexType>
-    </xs:element>   
-    <xs:complexType name="serviceStatus">
+    </xs:element>
+    <xs:complexType name="serviceStatusCinema">
         <xs:sequence>
             <xs:element name="statusCode" type="xs:string"/>
             <xs:element name="message" type="xs:string"/>
         </xs:sequence>
-    </xs:complexType>     
+    </xs:complexType>
     <xs:element name="addCinemaRequest">
         <xs:complexType>
             <xs:sequence>
@@ -49,7 +49,7 @@
     <xs:element name="addCinemaResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="serviceStatus" type="tns:serviceStatus"/>            
+                <xs:element name="serviceStatusCinema" type="tns:serviceStatusCinema"/>
                 <xs:element name="cinemaInfo" type="tns:cinemaInfo"/>
             </xs:sequence>
         </xs:complexType>
@@ -64,7 +64,7 @@
     <xs:element name="updateCinemaResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="serviceStatus" type="tns:serviceStatus"/>
+                <xs:element name="serviceStatusCinema" type="tns:serviceStatusCinema"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -78,8 +78,8 @@
     <xs:element name="deleteCinemaResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="serviceStatus" type="tns:serviceStatus"/>
+                <xs:element name="serviceStatusCinema" type="tns:serviceStatusCinema"/>
             </xs:sequence>
         </xs:complexType>
-    </xs:element>                   
+    </xs:element>
 </xs:schema>

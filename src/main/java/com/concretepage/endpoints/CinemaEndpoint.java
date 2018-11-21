@@ -19,7 +19,7 @@ import com.concretepage.gs_ws.DeleteCinemaResponse;
 import com.concretepage.gs_ws.GetAllCinemasResponse;
 import com.concretepage.gs_ws.GetCinemaByIdRequest;
 import com.concretepage.gs_ws.GetCinemaByIdResponse;
-import com.concretepage.gs_ws.ServiceStatus;
+import com.concretepage.gs_ws.ServiceStatusCinema;
 import com.concretepage.gs_ws.UpdateCinemaRequest;
 import com.concretepage.gs_ws.UpdateCinemaResponse;
 import com.concretepage.service.ICinemaService;
@@ -57,22 +57,22 @@ public class CinemaEndpoint {
 	@ResponsePayload
 	public AddCinemaResponse addCinema(@RequestPayload AddCinemaRequest request) {
 		AddCinemaResponse response = new AddCinemaResponse();
-    	ServiceStatus serviceStatus = new ServiceStatus();		
+    	ServiceStatusCinema serviceStatusCinema = new ServiceStatusCinema();
 		Cinema cinema = new Cinema();
 		cinema.setTitle(request.getTitle());
 		cinema.setAdresse(request.getAdresse());
         boolean flag = cinemaService.addCinema(cinema);
         if (flag == false) {
-        	serviceStatus.setStatusCode("CONFLICT");
-        	serviceStatus.setMessage("Content Already Available");
-        	response.setServiceStatus(serviceStatus);
+        	serviceStatusCinema.setStatusCode("CONFLICT");
+        	serviceStatusCinema.setMessage("Content Already Available");
+        	response.setServiceStatusCinema(serviceStatusCinema);
         } else {
 			CinemaInfo cinemaInfo = new CinemaInfo();
 	        BeanUtils.copyProperties(cinema, cinemaInfo);
 			response.setCinemaInfo(cinemaInfo);
-        	serviceStatus.setStatusCode("SUCCESS");
-        	serviceStatus.setMessage("Content Added Successfully");
-        	response.setServiceStatus(serviceStatus);
+        	serviceStatusCinema.setStatusCode("SUCCESS");
+        	serviceStatusCinema.setMessage("Content Added Successfully");
+        	response.setServiceStatusCinema(serviceStatusCinema);
         }
         return response;
 	}
@@ -82,28 +82,28 @@ public class CinemaEndpoint {
 		Cinema cinema = new Cinema();
 		BeanUtils.copyProperties(request.getCinemaInfo(), cinema);
 		cinemaService.updateCinema(cinema);
-    	ServiceStatus serviceStatus = new ServiceStatus();
-    	serviceStatus.setStatusCode("SUCCESS");
-    	serviceStatus.setMessage("Content Updated Successfully");
+    	ServiceStatusCinema serviceStatusCinema = new ServiceStatusCinema();
+    	serviceStatusCinema.setStatusCode("SUCCESS");
+    	serviceStatusCinema.setMessage("Content Updated Successfully");
     	UpdateCinemaResponse response = new UpdateCinemaResponse();
-    	response.setServiceStatus(serviceStatus);
+    	response.setServiceStatusCinema(serviceStatusCinema);
     	return response;
 	}
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "deleteCinemaRequest")
 	@ResponsePayload
 	public DeleteCinemaResponse deleteCinema(@RequestPayload DeleteCinemaRequest request) {
 		Cinema cinema = cinemaService.getCinemaById(request.getCinemaId());
-    	ServiceStatus serviceStatus = new ServiceStatus();
+    	ServiceStatusCinema serviceStatusCinema = new ServiceStatusCinema();
 		if (cinema == null ) {
-	    	serviceStatus.setStatusCode("FAIL");
-	    	serviceStatus.setMessage("Content Not Available");
+	    	serviceStatusCinema.setStatusCode("FAIL");
+	    	serviceStatusCinema.setMessage("Content Not Available");
 		} else {
 			cinemaService.deleteCinema(cinema);
-	    	serviceStatus.setStatusCode("SUCCESS");
-	    	serviceStatus.setMessage("Content Deleted Successfully");
+	    	serviceStatusCinema.setStatusCode("SUCCESS");
+	    	serviceStatusCinema.setMessage("Content Deleted Successfully");
 		}
     	DeleteCinemaResponse response = new DeleteCinemaResponse();
-    	response.setServiceStatus(serviceStatus);
+    	response.setServiceStatusCinema(serviceStatusCinema);
 		return response;
 	}	
 }

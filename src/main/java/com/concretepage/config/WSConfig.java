@@ -35,4 +35,19 @@ public class WSConfig extends WsConfigurerAdapter {
 	public XsdSchema cinemasSchema() {
 		return new SimpleXsdSchema(new ClassPathResource("xsds/cinemas.xsd"));
 	}
+
+
+	@Bean(name = "movies")
+	public DefaultWsdl11Definition defaultWsdl11DefinitionMovie(XsdSchema moviesSchema) {
+		DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
+		wsdl11Definition.setPortTypeName("MoviesPort");
+		wsdl11Definition.setLocationUri("/soapws");
+		wsdl11Definition.setTargetNamespace("http://www.concretepage.com/movie-ws");
+		wsdl11Definition.setSchema(moviesSchema);
+		return wsdl11Definition;
+	}
+	@Bean
+	public XsdSchema moviesSchema() {
+		return new SimpleXsdSchema(new ClassPathResource("xsds/movies.xsd"));
+	}
 }
